@@ -14,6 +14,10 @@ trait MapsFinishReason
      */
     protected function mapFinishReason(array $data): FinishReason
     {
+        if ((data_get($data, 'done') === true) && data_get($data, 'done_reason') === null) {
+            data_set($data, 'done_reason', 'stop');
+        }
+        
         return FinishReasonMap::map(data_get($data, 'done_reason', ''));
     }
 }
